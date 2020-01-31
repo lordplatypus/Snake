@@ -1,0 +1,4 @@
+cd /home/bryce/Documents/SFML/Snake/Source/
+g++ -g -c main.cpp LP.cpp Game.cpp Titlescene.cpp Playscene.cpp Map.cpp SnakeHead.cpp SnakeBody.cpp
+g++ main.o LP.o Game.o Titlescene.o Playscene.o Map.o SnakeHead.o SnakeBody.o -o Snake -lsfml-graphics -lsfml-window -lsfml-system
+./Snake
