@@ -9,6 +9,7 @@ public:
     SnakeBody(int newX, int newY);
     ~SnakeBody();
     void SetLocation(int newX, int newY);
+    void SetRandomColor();
     sf::Vector2<int> ReturnLocation();
     void Draw();
 private:

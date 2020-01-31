@@ -7,7 +7,8 @@ SnakeBody::SnakeBody(int newX, int newY) : x{newX}, y{newY}
 {
     x = newX;
     y = newY;
-    body.setFillColor(Color::Blue);
+    //body.setFillColor(Color::Blue);
+    SetRandomColor();
     Vector2<float> bodySize;
     bodySize.x = CellSize;
     bodySize.y = CellSize;
@@ -23,6 +24,16 @@ void SnakeBody::SetLocation(int newX, int newY)
     x = newX;
     y = newY;
     body.setPosition(x, y);
+}
+
+void SnakeBody::SetRandomColor()
+{
+    srand(time(NULL));
+    int randColor = rand() % 4;
+    if (randColor == 0) body.setFillColor(Color::Red);
+    else if (randColor == 2) body.setFillColor(Color::Yellow);
+    else if (randColor == 3) body.setFillColor(Color::Cyan);
+    else body.setFillColor(Color::Magenta);
 }
 
 Vector2<int> SnakeBody::ReturnLocation()

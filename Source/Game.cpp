@@ -14,8 +14,8 @@ Game::Game()
 
 Game::~Game()
 {
-    scene->~Scene();
-}
+    delete scene;
+} 
 
 void Game::Init()
 {
