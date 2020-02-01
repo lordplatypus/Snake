@@ -10,7 +10,7 @@ public:
     Game();
     ~Game();
     void Init();
-    void Update(sf::Event* event);
+    void Update();
     void Draw();
     void ChangeScene();
     static void ChangeScene(Scene* newScene);

@@ -3,6 +3,7 @@
 #include <vector>
 #include "/home/bryce/Documents/SFML/Snake/Headers/LP.h"
 #include "/home/bryce/Documents/SFML/Snake/Headers/Game.h"
+#include "/home/bryce/Documents/SFML/Snake/Headers/Input.h"
 using namespace sf;
 using namespace std;
 
@@ -11,8 +12,9 @@ using namespace std;
 int main()
 {
     RenderWindow window(VideoMode(1080, 720), "game window");
-    //LP lp;
+    window.setKeyRepeatEnabled(false);
     Game game;
+    game.Init();
 
     while (window.isOpen())
     {
@@ -24,11 +26,10 @@ int main()
                 window.close();
             }
 
-            game.Update(&event);
+            game.Update();
             game.Draw();
 
             window.clear();
-            //lp.Draw(&window);
             LP::Draw(&window);
             window.display();
         }

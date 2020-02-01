@@ -3,14 +3,13 @@
 #include "/home/bryce/Documents/SFML/Snake/Headers/LP.h"
 #include "/home/bryce/Documents/SFML/Snake/Headers/Playscene.h"
 #include "/home/bryce/Documents/SFML/Snake/Headers/Titlescene.h"
+#include "/home/bryce/Documents/SFML/Snake/Headers/Input.h"
 using namespace sf;
 
 Scene* Game::scene;
 
 Game::Game()
-{
-    scene = new Titlescene();
-}
+{}
 
 Game::~Game()
 {
@@ -19,9 +18,10 @@ Game::~Game()
 
 void Game::Init()
 {
+    scene = new Titlescene();
 }
 
-void Game::Update(Event* event)
+void Game::Update()
 {
     scene->Update();
 }

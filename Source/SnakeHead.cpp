@@ -4,6 +4,7 @@
 #include "/home/bryce/Documents/SFML/Snake/Headers/Playscene.h"
 #include "/home/bryce/Documents/SFML/Snake/Headers/Titlescene.h"
 #include "/home/bryce/Documents/SFML/Snake/Headers/Game.h"
+#include "/home/bryce/Documents/SFML/Snake/Headers/Input.h"
 using namespace sf;
 
 
@@ -41,10 +42,15 @@ void SnakeHead::SetLocation(int newX, int newY)
 
 void SnakeHead::Update()
 {
+    // if (Keyboard::isKeyPressed(Keyboard::Left))
+    // {
+    //     move = -CellSize;
+    //     Move();
+    // }
     if (Keyboard::isKeyPressed(Keyboard::Left))
     {
         move = -CellSize;
-        Move();
+        Move();       
     }
     else if (Keyboard::isKeyPressed(Keyboard::Right))
     {
