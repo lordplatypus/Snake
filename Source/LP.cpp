@@ -7,7 +7,8 @@ using namespace std;
 
 vector<CircleShape> LP::circles;
 vector<RectangleShape*> LP::rectangles;
-map<string, RectangleShape> LP::rectangleMap;
+map<int, RectangleShape> LP::rectangleMap;
+int LP::rectangleMapCount = -1;
 
 LP::LP()
 {
@@ -17,11 +18,6 @@ LP::LP()
 
 LP::~LP()
 {
-}
-
-void LP::SetPermanentRectangle(string name, RectangleShape rectangle)
-{
-    rectangleMap.insert(pair<string, RectangleShape>(name, rectangle));
 }
 
 void LP::DrawCircle(CircleShape circle)
@@ -42,6 +38,29 @@ void LP::DrawRectangle(RectangleShape *rectangle)
     rectangles.push_back(rectangle);
 }
 
+
+int LP::SetRectangle(int x, int y, int size, sf::Color color)
+{
+    rectangleMapCount++;
+    RectangleShape temp;
+    temp.setSize(Vector2<float>(size, size));
+    temp.setPosition(x, y);
+    temp.setFillColor(color);
+    //rectangleMap.insert(pair(rectangleMapCount, temp));
+    rectangleMap[rectangleMapCount] = temp;
+    return rectangleMapCount;
+}
+
+void LP::DrawRectangle(int x, int y, int size, sf::Color color, int handle)
+{
+    RectangleShape* temp;
+    temp = &rectangleMap[handle];
+    temp->setPosition(x, y);
+    temp->setSize(Vector2<float>(size, size));
+    temp->setFillColor(color);
+}
+
+
 void LP::Draw(RenderWindow *window)
 {
     if (circles.size() > 0)
@@ -60,6 +79,13 @@ void LP::Draw(RenderWindow *window)
         {
             window->draw(*rectangles[i]);
             rectangles.pop_back();
+        }
+    }
+    if(rectangleMap.size() > 0)
+    {
+        for (int i = 0; i < rectangleMap.size(); i++)
+        {
+            window->draw(rectangleMap[i]);
         }
     }
 }

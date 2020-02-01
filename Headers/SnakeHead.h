@@ -26,7 +26,7 @@ private:
     int y;
     sf::RectangleShape head;
     std::vector<sf::Vector2<int> > bodyPositions;
-    
+    int player;
 };
 
 #endif

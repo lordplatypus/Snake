@@ -4,20 +4,22 @@
 #include "/home/bryce/Documents/SFML/Snake/Headers/Playscene.h"
 #include "/home/bryce/Documents/SFML/Snake/Headers/Titlescene.h"
 #include "/home/bryce/Documents/SFML/Snake/Headers/Game.h"
-#include "/home/bryce/Documents/SFML/Snake/Headers/Input.h"
+#include "/home/bryce/Documents/SFML/Snake/Headers/LoadImage.h"
 using namespace sf;
 
 
 SnakeHead::SnakeHead()
 {
-    head.setFillColor(Color::Blue);
-    Vector2<float> headSize;
-    headSize.x = CellSize;
-    headSize.y = CellSize;
-    head.setSize(headSize);
+    // head.setFillColor(Color::Blue);
+    // Vector2<float> headSize;
+    // headSize.x = CellSize;
+    // headSize.y = CellSize;
+    // head.setSize(headSize);
 
     bodyPositions.resize(0);
     bodySegments.resize(0);
+
+    //player = LP::SetRectangle(0, 0, 32, Color::Blue);
 }
 
 SnakeHead::~SnakeHead()
@@ -37,16 +39,11 @@ void SnakeHead::SetLocation(int newX, int newY)
 {
     x = newX;
     y = newY;
-    head.setPosition(x, y);
+    //head.setPosition(x, y);
 }
 
 void SnakeHead::Update()
 {
-    // if (Keyboard::isKeyPressed(Keyboard::Left))
-    // {
-    //     move = -CellSize;
-    //     Move();
-    // }
     if (Keyboard::isKeyPressed(Keyboard::Left))
     {
         move = -CellSize;
@@ -83,7 +80,7 @@ void SnakeHead::Move()
     //actually move
     if (Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::Right)) x += move;
     if (Keyboard::isKeyPressed(Keyboard::Up) || Keyboard::isKeyPressed(Keyboard::Down)) y += move;
-    head.setPosition(x, y);
+    //head.setPosition(x, y);
 
     //check loction that the head is moving to
     int locationKey = playScene->map->ReturnLocation(x, y);
@@ -118,7 +115,8 @@ void SnakeHead::Move()
 
 void SnakeHead::Draw()
 {
-    LP::DrawRectangle(&head);
+    //LP::DrawRectangle(&head);
+    LP::DrawRectangle(x, y, 32, Color::Blue, LoadImage::player);
     if (bodySegments.size() > 0)
     {
         for (int i = 0; i < bodySegments.size(); i++)
