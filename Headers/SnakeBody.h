@@ -9,11 +9,12 @@ public:
     SnakeBody(int newX, int newY);
     ~SnakeBody();
     void SetLocation(int newX, int newY);
-    void SetRandomColor();
+    sf::Color SetRandomColor();
     sf::Vector2<int> ReturnLocation();
     void Draw();
 private:
-    sf::RectangleShape body;
+    //sf::RectangleShape body;
+    int body;
     int CellSize = 32;
     int move = 32;
     int x;

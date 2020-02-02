@@ -23,7 +23,7 @@ void Playscene::Init()
     snakeHead = new SnakeHead;
     snakeHead->Init(this);
     map->Init(this);
-    map->PlaceFood();
+    //map->PlaceFood();
 }
 
 void Playscene::Update()

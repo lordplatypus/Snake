@@ -25,9 +25,13 @@ private:
     int lastFoodLocX = 1;
     int lastFoodLocY = 1;
     std::vector<std::vector<int> > map;
-    std::vector<sf::RectangleShape> walls;
-    sf::RectangleShape wall;
-    sf::RectangleShape food;
+    // std::vector<sf::RectangleShape> walls;
+    // sf::RectangleShape wall;
+    // sf::RectangleShape food;
+    std::vector<int> walls;
+    int food;
+    int foodX = 0;
+    int foodY = 0;
 };
 
 #endif

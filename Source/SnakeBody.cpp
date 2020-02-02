@@ -8,12 +8,13 @@ SnakeBody::SnakeBody(int newX, int newY) : x{newX}, y{newY}
     x = newX;
     y = newY;
     //body.setFillColor(Color::Blue);
-    SetRandomColor();
-    Vector2<float> bodySize;
-    bodySize.x = CellSize;
-    bodySize.y = CellSize;
-    body.setSize(bodySize);
-    body.setPosition(x, y);
+    // SetRandomColor();
+    // Vector2<float> bodySize;
+    // bodySize.x = CellSize;
+    // bodySize.y = CellSize;
+    // body.setSize(bodySize);
+    // body.setPosition(x, y);
+    body = LP::SetRectangle(x, y, 32, SetRandomColor());
 }
 
 SnakeBody::~SnakeBody()
@@ -23,17 +24,19 @@ void SnakeBody::SetLocation(int newX, int newY)
 {
     x = newX;
     y = newY;
-    body.setPosition(x, y);
+    //body.setPosition(x, y);
 }
 
-void SnakeBody::SetRandomColor()
+Color SnakeBody::SetRandomColor()
 {
+    Color color;
     srand(time(NULL));
     int randColor = rand() % 4;
-    if (randColor == 0) body.setFillColor(Color::Red);
-    else if (randColor == 2) body.setFillColor(Color::Yellow);
-    else if (randColor == 3) body.setFillColor(Color::Cyan);
-    else body.setFillColor(Color::Magenta);
+    if (randColor == 0) color = Color::Red;
+    else if (randColor == 2) color = Color::Yellow;
+    else if (randColor == 3) color = Color::Cyan;
+    else color = Color::Magenta;
+    return color;
 }
 
 Vector2<int> SnakeBody::ReturnLocation()
@@ -43,5 +46,5 @@ Vector2<int> SnakeBody::ReturnLocation()
 
 void SnakeBody::Draw()
 {
-    LP::DrawRectangle(&body);
+    LP::DrawRectangle(x, y, 32, SetRandomColor(), body);
 }

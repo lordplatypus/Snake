@@ -15,5 +15,5 @@ LoadImage::~LoadImage()
 void LoadImage::Load()
 {
     //wall.loadFromFile("/home/bryce/Documents/SFML/Snake/wall.png");
-    player  = LP::SetRectangle(0, 0, 32, Color::Blue);
+    //player  = LP::SetRectangle(0, 0, 32, Color::Blue);
 }

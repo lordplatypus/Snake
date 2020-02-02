@@ -11,29 +11,31 @@ using namespace std;
 
 int main()
 {
+    bool isRunning = true;
     RenderWindow window(VideoMode(1080, 720), "game window");
     window.setKeyRepeatEnabled(false);
     Game game;
     game.Init();
 
-    while (window.isOpen())
+    while (isRunning)
     {
         Event event;
         while (window.pollEvent(event))
         {
             if (event.type == Event::Closed)
             {
-                window.close();
+                isRunning = false;
             }
-
-            game.Update();
-            game.Draw();
-
-            window.clear();
-            LP::Draw(&window);
-            window.display();
+            if (event.key.code == Keyboard::Escape)
+            {
+                isRunning = false;
+            }           
+            game.Update();            
         }
+        game.Draw();
+        window.clear();
+        LP::Draw(&window);
+        window.display();
     }
-    game.~Game();
     return EXIT_SUCCESS;
 }

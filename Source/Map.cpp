@@ -10,16 +10,19 @@ Map::Map()
 {
     walls.resize(0);
 
-    Vector2<float> length;
-    length.x = CellSize;
-    length.y = CellSize;
-    wall.setSize(length);
-    wall.setFillColor(Color::White);
+    // Vector2<float> length;
+    // length.x = CellSize;
+    // length.y = CellSize;
+    // wall.setSize(length);
+    // wall.setFillColor(Color::White);
 
-    food.setSize(length);
-    food.setFillColor(Color::Green);
+    // food.setSize(length);
+    // food.setFillColor(Color::Green);
 
     CreateMap();
+
+    food = LP::SetRectangle(0, 0, 32, Color::Green);
+    PlaceFood();
 }
 
 Map::~Map()
@@ -51,8 +54,9 @@ void Map::CreateMap()
             if (x == mapSize - 1 || x == 0 || y == mapSize - 1 || y == 0)
             {
                 map[x][y] = 1;
-                wall.setPosition(x*CellSize, y*CellSize);
-                walls.push_back(wall);
+                //wall.setPosition(x*CellSize, y*CellSize);
+                //walls.push_back(wall);
+                walls.push_back(LP::SetRectangle(x*CellSize, y*CellSize, CellSize, Color::White));
             }
             else if (x == mapSize - 2 && y == mapSize / 2)
             {
@@ -79,14 +83,16 @@ void Map::SetSnakeHead()
 
 void Map::PlaceFood()
 {
-    map[lastFoodLocX][lastFoodLocY] = 0;
+    map[foodX/CellSize][foodY/CellSize] = 0;
     srand(time(NULL));
-    int randX = (rand() % (mapSize-2)) + 1;
-    int randY = (rand() % (mapSize-2)) + 1;
-    map[randX][randY] = 3;
-    food.setPosition(randX* CellSize, randY* CellSize);
-    lastFoodLocX = randX;
-    lastFoodLocY = randY;
+    foodX = (rand() % (mapSize-2)) + 1;
+    foodY = (rand() % (mapSize-2)) + 1;
+    map[foodX][foodY] = 3;
+    // food.setPosition(randX* CellSize, randY* CellSize);
+    // lastFoodLocX = randX;
+    // lastFoodLocY = randY;
+    foodX *= CellSize;
+    foodY *= CellSize;
 }
 
 int Map::ReturnLocation(int x, int y)
@@ -100,7 +106,7 @@ void Map::Draw()
 {
     for (int i = 0; i < walls.size(); i++)
     {
-        LP::DrawRectangle(&walls[i]);
+        LP::DrawRectangle(walls[i]);
     }
-    LP::DrawRectangle(&food);
+    LP::DrawRectangle(foodX, foodY, 32, Color::Green, food);
 }

@@ -19,7 +19,7 @@ SnakeHead::SnakeHead()
     bodyPositions.resize(0);
     bodySegments.resize(0);
 
-    //player = LP::SetRectangle(0, 0, 32, Color::Blue);
+    player = LP::SetRectangle(0, 0, 32, Color::Blue);
 }
 
 SnakeHead::~SnakeHead()
@@ -116,7 +116,7 @@ void SnakeHead::Move()
 void SnakeHead::Draw()
 {
     //LP::DrawRectangle(&head);
-    LP::DrawRectangle(x, y, 32, Color::Blue, LoadImage::player);
+    LP::DrawRectangle(x, y, 32, Color::Blue, player);
     if (bodySegments.size() > 0)
     {
         for (int i = 0; i < bodySegments.size(); i++)

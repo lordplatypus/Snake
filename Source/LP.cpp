@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <stack>
 #include "/home/bryce/Documents/SFML/Snake/Headers/Game.h"
 #include "/home/bryce/Documents/SFML/Snake/Headers/LP.h"
 using namespace sf;
@@ -9,6 +10,7 @@ vector<CircleShape> LP::circles;
 vector<RectangleShape*> LP::rectangles;
 map<int, RectangleShape> LP::rectangleMap;
 int LP::rectangleMapCount = -1;
+stack<int> LP::thingsToDraw;
 
 LP::LP()
 {
@@ -33,12 +35,6 @@ void LP::DrawCircle(CircleShape circle, int x, int y, Color color, int size)
     circles.push_back(circle);
 }
 
-void LP::DrawRectangle(RectangleShape *rectangle)
-{
-    rectangles.push_back(rectangle);
-}
-
-
 int LP::SetRectangle(int x, int y, int size, sf::Color color)
 {
     rectangleMapCount++;
@@ -46,18 +42,23 @@ int LP::SetRectangle(int x, int y, int size, sf::Color color)
     temp.setSize(Vector2<float>(size, size));
     temp.setPosition(x, y);
     temp.setFillColor(color);
-    //rectangleMap.insert(pair(rectangleMapCount, temp));
     rectangleMap[rectangleMapCount] = temp;
     return rectangleMapCount;
 }
 
-void LP::DrawRectangle(int x, int y, int size, sf::Color color, int handle)
+void LP::DrawRectangle(int key)
+{
+    thingsToDraw.push(key);
+}
+
+void LP::DrawRectangle(int x, int y, int size, sf::Color color, int key)
 {
     RectangleShape* temp;
-    temp = &rectangleMap[handle];
+    temp = &rectangleMap[key];
     temp->setPosition(x, y);
     temp->setSize(Vector2<float>(size, size));
     temp->setFillColor(color);
+    thingsToDraw.push(key);
 }
 
 
@@ -81,11 +82,13 @@ void LP::Draw(RenderWindow *window)
             rectangles.pop_back();
         }
     }
-    if(rectangleMap.size() > 0)
+    if(thingsToDraw.size() > 0)
     {
-        for (int i = 0; i < rectangleMap.size(); i++)
+        int numOfThingsToDraw = thingsToDraw.size();
+        for (int i = 0; i < numOfThingsToDraw; i++)
         {
-            window->draw(rectangleMap[i]);
+            window->draw(rectangleMap[thingsToDraw.top()]);
+            thingsToDraw.pop();
         }
     }
 }
